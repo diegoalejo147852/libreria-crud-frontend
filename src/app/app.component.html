@@ -1,0 +1,75 @@
+<div class="formularioRegistro">
+  <h1  class="text-center" >Libreria</h1>
+  <form [formGroup]="librosForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" formControlName="nombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Descripción</label>
+      <input type="text" formControlName="descripcion" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Autor</label>
+      <input type="text" formControlName="autor" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Fecha de Publicación</label>
+      <input type="date" formControlName="fechaPublicacion" class="form-control">
+    </div>    
+    <div class="form-group">
+      <label>Número de Ejemplares</label>
+      <input type="number" formControlName="numEjemplar" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Costo</label>
+      <input type="number" formControlName="costo" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="librosForm.invalid"><mat-icon color = "white">add</mat-icon></button>
+  </form>  
+  </div>  
+<br/>
+<br/>
+<br/>
+<div class="container-fluid" >
+  <!--<ng-container *ngIf="libros.service">-->
+  <table class="table-responsive col-sm-12 row-border hover" >
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Autor</th>
+        <th>Fecha de Publicación</th>
+        <th>Número de Ejemplares</th>
+        <th>Costo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of libros">
+        <td>{{item.nombre}}</td>
+        <td>{{item.descripcion}}</td>
+        <td>{{item.autor}}</td>
+        <td>{{item.fechaPublicacion}}</td>
+        <td>{{item.numEjemplar}}</td>
+        <td>{{item.costo}}</td>
+        <td>
+          <div class="container-fluid btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-success" (click)="editar(item)"><mat-icon color = "white">update</mat-icon></button>
+              <button type="button" class="btn btn-danger" (click)="eliminar(item.id)"><mat-icon color = "white">delete</mat-icon></button>            
+            </div>
+        </td>
+      </tr>
+    </tbody>
+    <mat-paginator [length]="100"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+  </mat-paginator>
+  </table>
+<!--</ng-container>-->
+
+
+</div>
+
+<router-outlet></router-outlet>
